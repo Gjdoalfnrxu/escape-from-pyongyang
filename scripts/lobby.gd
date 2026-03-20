@@ -26,7 +26,7 @@ func _ready() -> void:
 
 func _on_host_pressed() -> void:
 	var port := int(port_field.text) if port_field.text.is_valid_int() else 4433
-	var err := network.host(port)
+	var err: Error = network.host(port)
 	if err == OK:
 		status_label.text = "Hosting on port %d — share your IP with friends" % port
 		host_btn.disabled = true
@@ -42,7 +42,7 @@ func _on_join_pressed() -> void:
 		status_label.text = "Enter a server IP"
 		return
 	var port := int(port_field.text) if port_field.text.is_valid_int() else 4433
-	var err := network.join(ip, port)
+	var err: Error = network.join(ip, port)
 	if err == OK:
 		status_label.text = "Connecting to %s:%d..." % [ip, port]
 		host_btn.disabled = true

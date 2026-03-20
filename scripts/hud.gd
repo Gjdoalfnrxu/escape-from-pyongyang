@@ -11,7 +11,7 @@ var elapsed := 0.0
 
 func _process(delta: float) -> void:
 	elapsed += delta
-	var remaining := max(0.0, raid_time - elapsed)
+	var remaining: float = maxf(0.0, raid_time - elapsed)
 	var mins := int(remaining) / 60
 	var secs := int(remaining) % 60
 	timer_label.text = "%02d:%02d" % [mins, secs]
