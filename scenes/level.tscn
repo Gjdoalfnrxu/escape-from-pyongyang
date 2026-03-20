@@ -1,0 +1,99 @@
+[gd_scene load_steps=5 format=3 uid="uid://level"]
+
+[ext_resource type="Script" path="res://scripts/hud.gd" id="1_hud"]
+[ext_resource type="Script" path="res://scripts/extraction_zone.gd" id="2_exzone"]
+[ext_resource type="Script" path="res://scripts/loot_item.gd" id="3_loot"]
+[ext_resource type="PackedScene" uid="uid://enemy" path="res://scenes/enemy.tscn" id="4_enemy"]
+
+[node name="Level" type="Node2D"]
+
+[node name="World" type="TileMapLayer" parent="."]
+
+[node name="Players" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Loot" type="Node2D" parent="."]
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="SpawnPoint1" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(120, 120)
+add_to_group = ["spawn_points"]
+
+[node name="SpawnPoint2" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(1160, 120)
+add_to_group = ["spawn_points"]
+
+[node name="SpawnPoint3" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(120, 600)
+add_to_group = ["spawn_points"]
+
+[node name="SpawnPoint4" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(1160, 600)
+add_to_group = ["spawn_points"]
+
+[node name="ExtractionZone" type="Area2D" parent="."]
+position = Vector2(640, 360)
+script = ExtResource("2_exzone")
+
+[node name="ExtractionZone/CollisionShape2D" type="CollisionShape2D" parent="ExtractionZone"]
+
+[node name="ExtractionZone/Label" type="Label" parent="ExtractionZone"]
+offset_left = -60.0
+offset_top = -50.0
+offset_right = 60.0
+offset_bottom = -30.0
+horizontal_alignment = 1
+text = "EXTRACTION"
+modulate = Color(0.3, 1.0, 0.3, 1)
+
+[node name="ExtractionZone/ProgressBar" type="ProgressBar" parent="ExtractionZone"]
+offset_left = -60.0
+offset_top = 30.0
+offset_right = 60.0
+offset_bottom = 50.0
+visible = false
+show_percentage = false
+
+[node name="ExtractionZone/ExtractTimer" type="Timer" parent="ExtractionZone"]
+one_shot = true
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("1_hud")
+
+[node name="HUD/MarginContainer" type="MarginContainer" parent="HUD"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HUD/MarginContainer/HBox" type="HBoxContainer" parent="HUD/MarginContainer"]
+alignment = 2
+
+[node name="HUD/MarginContainer/HBox/HealthLabel" type="Label" parent="HUD/MarginContainer/HBox"]
+text = "HP: 100/100"
+
+[node name="HUD/MarginContainer/HBox/LootLabel" type="Label" parent="HUD/MarginContainer/HBox"]
+text = "LOOT: —"
+
+[node name="HUD/MarginContainer/HBox/TimerLabel" type="Label" parent="HUD/MarginContainer/HBox"]
+text = "10:00"
+
+[node name="HUD/ExtractionLabel" type="Label" parent="HUD"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = 60.0
+offset_right = 100.0
+offset_bottom = 90.0
+horizontal_alignment = 1
+text = "HOLD — EXTRACTING"
+modulate = Color(0.3, 1.0, 0.3, 1)
+visible = false

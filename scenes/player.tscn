@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://player"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_player"]
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 1
+collision_mask = 2
+script = ExtResource("1_player")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.2, 0.8, 0.3, 1)
+
+[node name="GunPivot" type="Node2D" parent="."]
+
+[node name="GunPivot/GunSprite" type="Sprite2D" parent="GunPivot"]
+position = Vector2(20, 0)
+scale = Vector2(0.5, 0.3)
+modulate = Color(0.5, 0.5, 0.5, 1)
+
+[node name="GunPivot/Muzzle" type="Marker2D" parent="GunPivot"]
+position = Vector2(36, 0)
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -24.0
+offset_top = -40.0
+offset_right = 24.0
+offset_bottom = -30.0
+show_percentage = false
+
+[node name="FireTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+root_path = NodePath(".")
+replication_config = null
