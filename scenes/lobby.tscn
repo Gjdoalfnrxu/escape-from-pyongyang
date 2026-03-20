@@ -48,8 +48,11 @@ placeholder_text = "Server IP"
 placeholder_text = "Port (default 4433)"
 text = "4433"
 
+[node name="SoloBtn" type="Button" parent="VBox"]
+text = "PLAY SOLO (OFFLINE)"
+
 [node name="HostBtn" type="Button" parent="VBox"]
-text = "HOST GAME"
+text = "HOST GAME (native binary only)"
 
 [node name="JoinBtn" type="Button" parent="VBox"]
 text = "JOIN GAME"

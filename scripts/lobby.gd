@@ -8,6 +8,7 @@ extends Control
 @onready var start_btn: Button = $VBox/StartBtn
 @onready var player_list: VBoxContainer = $VBox/PlayerList
 
+@onready var solo_btn: Button = $VBox/SoloBtn
 @onready var network: Node = $"/root/NetworkManager"
 
 
@@ -15,6 +16,7 @@ func _ready() -> void:
 	host_btn.pressed.connect(_on_host_pressed)
 	join_btn.pressed.connect(_on_join_pressed)
 	start_btn.pressed.connect(_on_start_pressed)
+	solo_btn.pressed.connect(_on_solo_pressed)
 	network.player_joined.connect(_refresh_player_list)
 	network.player_left.connect(_refresh_player_list)
 	network.game_started.connect(_on_game_started)
@@ -55,6 +57,14 @@ func _on_start_pressed() -> void:
 	if not network.is_host():
 		return
 	network.start_game.rpc()
+
+
+func _on_solo_pressed() -> void:
+	# Offline solo mode: use an OfflineMultiplayerPeer so RPCs work without a server
+	var offline := OfflineMultiplayerPeer.new()
+	multiplayer.multiplayer_peer = offline
+	network.players[1] = {"name": "Player_1", "ready": true}
+	get_tree().change_scene_to_file("res://scenes/level.tscn")
 
 
 func _on_game_started() -> void:
