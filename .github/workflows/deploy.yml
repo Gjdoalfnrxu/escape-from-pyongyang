@@ -38,13 +38,11 @@ jobs:
           mkdir -p builds/web
           godot --headless --export-release "Web" builds/web/index.html
 
-      - name: Add COOP/COEP headers via _headers file
+      - name: Add coi-serviceworker for GitHub Pages COOP/COEP
         run: |
-          cat > builds/web/_headers << 'EOF'
-          /*
-            Cross-Origin-Embedder-Policy: require-corp
-            Cross-Origin-Opener-Policy: same-origin
-          EOF
+          curl -sL "https://raw.githubusercontent.com/gzuidhof/coi-serviceworker/master/coi-serviceworker.js" \
+            -o builds/web/coi-serviceworker.js
+          sed -i 's|</head>|<script src="coi-serviceworker.js"></script></head>|' builds/web/index.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
