@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://main"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_main"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_main")
+
+[node name="MultiplayerAPI" type="Node" parent="."]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="StatusLabel" type="Label" parent="HUD"]
+offset_left = 16.0
+offset_top = 16.0
+text = "Escape from Pyongyang"
